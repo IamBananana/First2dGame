@@ -71,8 +71,6 @@ public class GamePanel extends JPanel implements Runnable{
             delta += (currentTime - lastTime)/drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
-            //dette er en kode
-            
 
             if (delta >= 1) {
             //Will do 2 things in this loop. Nr 1 is UPDATE information such as character positions
