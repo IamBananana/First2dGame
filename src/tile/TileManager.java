@@ -12,8 +12,8 @@ import main.GamePanel;
 
 public class TileManager {
     GamePanel gp;
-    Tile[] tile;
-    int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -34,11 +34,13 @@ public class TileManager {
             fileStream = new FileInputStream(file);
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(fileStream);
+            tile[1].collision = true;
 
             file = new File("src/res/tiles/water.png");
             fileStream = new FileInputStream(file);
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(fileStream);
+            tile[2].collision = true;
 
             file = new File("src/res/tiles/earth.png");
             fileStream = new FileInputStream(file);
@@ -49,6 +51,7 @@ public class TileManager {
             fileStream = new FileInputStream(file);
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(fileStream);
+            tile[4].collision = true;
 
             file = new File("src/res/tiles/sand.png");
             fileStream = new FileInputStream(file);
