@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -31,13 +32,15 @@ public class GamePanel extends JPanel implements Runnable{
 
     //FPS
     final int FPS = 60;
-    
+
     //You need Thread for a game clock so that the program does not stop and wait for inputs but constantly runs
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
     TileManager tileM = new TileManager(this);
     public CollisionChecker colChecker = new CollisionChecker(this);
+    public AssetPlacer assetPlacer = new AssetPlacer(this);
     public Player player = new Player(this, keyH);
+    public SuperObject[] obj = new SuperObject[10];
 
     public GamePanel() {
         //Set the size of this class (JPanel)
@@ -49,6 +52,10 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         //gamepanel is focused to recieve key inputs
         this.setFocusable(true);
+    }
+
+    public void setupGame(){
+        assetPlacer.setObject();
     }
 
     //Starting the Thread and passing gamePanel into Thread(this) by using this.
@@ -99,7 +106,16 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
         //set graphics to be graphics 2d
         Graphics2D g2 = (Graphics2D)g;
+        //tile
         tileM.draw(g2);
+
+        //object
+        for (int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
+        //entity
         //draw player with the player class's method
         player.draw(g2);
         //dispose it and release any system resources that its using
